@@ -6,9 +6,11 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Components/ArrowComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "EnhancedInputComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "MyRocket.h"
 
 // Sets default values
 AMyP38::AMyP38()
@@ -27,6 +29,9 @@ AMyP38::AMyP38()
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
+
+	Arrow = CreateDefaultSubobject<UArrowComponent>(TEXT("Arrow"));
+	Arrow->SetupAttachment(Box);
 
 	Movement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Movement"));
 
@@ -73,7 +78,11 @@ void AMyP38::Rotate(const FInputActionValue& Value)
 
 void AMyP38::Fire(const FInputActionValue& Value)
 {
-
+	if (RocketTemplate)
+	{
+			GetWorld()->SpawnActor<AMyRocket>(RocketTemplate, Arrow->K2_GetComponentToWorld());
+	}
+	
 }
 
 void AMyP38::Boost(const FInputActionValue& Value)

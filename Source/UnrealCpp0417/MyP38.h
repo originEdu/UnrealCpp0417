@@ -11,9 +11,11 @@
 class UBoxComponent;
 class UStaticMeshComponent;
 class UFloatingPawnMovement;
+class UArrowComponent;
 class UInputAction;
 class USpringArmComponent;
 class UCameraComponent;
+class AMyRocket;
 
 UCLASS()
 class UNREALCPP0417_API AMyP38 : public APawn
@@ -40,6 +42,9 @@ public:
 	TObjectPtr<UStaticMeshComponent> Body;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	TObjectPtr<UArrowComponent> Arrow;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UFloatingPawnMovement> Movement;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
@@ -47,6 +52,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UCameraComponent> Camera;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	TSubclassOf<AMyRocket> RocketTemplate;
 
 	//Input 관련
 	// Called to bind functionality to input
