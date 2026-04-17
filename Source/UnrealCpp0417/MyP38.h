@@ -17,6 +17,8 @@ class USpringArmComponent;
 class UCameraComponent;
 class AMyRocket;
 
+DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE(FCountSignature, AMyP38, OnUpdateCount);
+
 UCLASS()
 class UNREALCPP0417_API AMyP38 : public APawn
 {
@@ -78,4 +80,17 @@ public:
 	void Unboost(const FInputActionValue& Value);
 
 	float BoostValue = 0.5f;
+
+	UPROPERTY(BlueprintAssignable, Category = "UMG")
+	FCountSignature OnUpdateCount;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void CallCPPTOExcuteBP();
+
+	UFUNCTION(BlueprintNativeEvent)
+	void CallDefaultCPPTOExcuteBP();
+	void CallDefaultCPPTOExcuteBP_Implementation();
+
+	UFUNCTION(BlueprintCallable)
+	void SupportBlueprint();
 };

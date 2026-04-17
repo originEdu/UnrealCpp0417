@@ -42,6 +42,7 @@ void AMyP38::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	CallCPPTOExcuteBP();
 }
 
 // Called every frame
@@ -58,9 +59,11 @@ void AMyP38::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	//옛날 인풋 컴포넌트를 향상된 인풋 컴포넌트로 다운캐스트
 	UEnhancedInputComponent* UIC = Cast<UEnhancedInputComponent>(PlayerInputComponent);
 	if (UIC)
 	{
+		//생성은 다 바인드액션
 		UIC->BindAction(IA_Rotate, ETriggerEvent::Triggered, this, &AMyP38::Rotate);
 		UIC->BindAction(IA_Fire, ETriggerEvent::Triggered, this, &AMyP38::Fire);
 		UIC->BindAction(IA_Boost, ETriggerEvent::Triggered, this, &AMyP38::Boost);
@@ -78,9 +81,10 @@ void AMyP38::Rotate(const FInputActionValue& Value)
 
 void AMyP38::Fire(const FInputActionValue& Value)
 {
+	OnUpdateCount.Broadcast();
 	if (RocketTemplate)
 	{
-			GetWorld()->SpawnActor<AMyRocket>(RocketTemplate, Arrow->K2_GetComponentToWorld());
+		GetWorld()->SpawnActor<AMyRocket>(RocketTemplate, Arrow->K2_GetComponentToWorld());
 	}
 	
 }
@@ -93,4 +97,12 @@ void AMyP38::Boost(const FInputActionValue& Value)
 void AMyP38::Unboost(const FInputActionValue& Value)
 {
 	BoostValue = 0.5f;
+}
+
+void AMyP38::CallDefaultCPPTOExcuteBP_Implementation()
+{
+}
+
+void AMyP38::SupportBlueprint()
+{
 }

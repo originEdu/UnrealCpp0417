@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "MyPlayerController.generated.h"
 
+class UInputMappingContext;
 /**
  * 
  */
@@ -18,5 +19,13 @@ public:
 	virtual void OnPossess(APawn* pawn) override;
 
 	UPROPERTY(EditAnywhere, Category = "Input")
-	TObjectPtr<class UInputMappingContext> InputMapping;
+	TObjectPtr<UInputMappingContext> InputMapping;
+
+	/*UPROPERTY(EditAnywhere, Category = "Input")
+	TArray<TObjectPtr<UInputMappingContext>> InputMappings;
+
+	TSoftObjectPtr<UInputMappingContext> SorftTest;*/
+
+	UFUNCTION()
+	void DisplayCount();
 };
