@@ -6,3 +6,6 @@
 - 이를 상속받은 BP_P38에 스테틱매쉬, Input Action 세팅
 - C++ 만든 PlayerController은 InputMapping 프로퍼티 구현
 - 이를 상속받은 BP_PlayerController에 Input Mapping Contextr 세팅
+
+- 순수하게 향상된 Input으로 비행기 이동하는 것만 구현되어 있습니다
+- 프로펠러 회전, 미사일 발사 요런거 제외함
